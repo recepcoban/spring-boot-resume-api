@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBootResumeApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootResumeApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootResumeApiApplication.class, args);
+    }
 
 }
