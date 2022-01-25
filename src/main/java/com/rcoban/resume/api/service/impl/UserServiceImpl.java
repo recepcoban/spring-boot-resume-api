@@ -6,6 +6,7 @@ import com.rcoban.resume.api.model.dto.UserDto;
 import com.rcoban.resume.api.model.mapper.UserMapper;
 import com.rcoban.resume.api.repository.UserRepository;
 import com.rcoban.resume.api.service.UserService;
+import com.rcoban.resume.api.utils.MessageUtil;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -23,19 +24,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(String email) {
         if (!StringUtils.hasText(email)) {
-            throw new RequiredFieldException("Email is required!");
+            throw new RequiredFieldException(MessageUtil.EMAIL_IS_REQUIRED.getCode());
         }
 
         return Optional.of(userRepository.findById(email))
                 .get()
                 .map(userMapper::userEntityToUserDto)
-                .orElseThrow(() -> new DataNotFoundException("User not found!"));
+                .orElseThrow(() -> new DataNotFoundException(MessageUtil.DATA_NOT_FOUND.getCode()));
     }
 
     @Override
     public UserDto createNewUser(UserDto userDto) {
         if (!StringUtils.hasText(userDto.getEmail())) {
-            throw new RequiredFieldException("Email is required!");
+            throw new RequiredFieldException(MessageUtil.EMAIL_IS_REQUIRED.getCode());
         }
 
         return Optional.of(userRepository.save(userMapper.userDtoToUserEntity(userDto)))
@@ -46,10 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(String email) {
         if (!StringUtils.hasText(email)) {
-            throw new RequiredFieldException("Email is required!");
+            throw new RequiredFieldException(MessageUtil.EMAIL_IS_REQUIRED.getCode());
         }
 
-        Optional.ofNullable(userRepository.findById(email).orElseThrow(() -> new DataNotFoundException("User not found!")))
+        Optional.ofNullable(userRepository.findById(email).orElseThrow(() -> new DataNotFoundException(MessageUtil.DATA_NOT_FOUND.getCode())))
                 .ifPresent(userEntity -> {
                     userEntity.setActive(false);
                     userRepository.save(userEntity);

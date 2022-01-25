@@ -11,6 +11,7 @@ public class ErrorResponse {
 
     private final int httpStatusCode;
     private final String httpStatusName;
+    private final String messageType;
     private final String messageCode;
     private final String messageText;
     private String stackTrace;

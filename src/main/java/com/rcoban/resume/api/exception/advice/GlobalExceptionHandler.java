@@ -3,6 +3,7 @@ package com.rcoban.resume.api.exception.advice;
 import com.rcoban.resume.api.exception.DataNotFoundException;
 import com.rcoban.resume.api.exception.ErrorResponse;
 import com.rcoban.resume.api.exception.RequiredFieldException;
+import com.rcoban.resume.api.utils.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +31,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
                                                                   WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), status.name(), "222", "Validation error. Check 'errors' field for details.");
+        MessageUtil message = MessageUtil.VALIDATION_ERROR;
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), status.name(), message.getType().toString(), message.getCode(), message.getText());
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
         }
@@ -71,7 +73,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> buildErrorResponse(Exception exception,
                                                       HttpStatus httpStatus,
                                                       WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(httpStatus.value(), httpStatus.name(), "111", exception.getMessage());
+        MessageUtil message = MessageUtil.getMessageByCode(exception.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(httpStatus.value(), httpStatus.name(), message.getType().toString(), message.getCode(), message.getText());
         if (printStackTrace) {
             errorResponse.setStackTrace(ExceptionUtils.getStackTrace(exception));
         }
