@@ -1,8 +1,11 @@
 package com.rcoban.resume.api.exception;
 
-public class DataNotFoundException extends RuntimeException {
+import com.rcoban.resume.api.model.response.MessageResponse;
+import lombok.Builder;
+import lombok.Getter;
 
-    public DataNotFoundException(String message) {
-        super(message);
-    }
+@Getter
+@Builder
+public class DataNotFoundException extends RuntimeException {
+    private MessageResponse messageResponse;
 }

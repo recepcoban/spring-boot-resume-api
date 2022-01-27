@@ -18,6 +18,5 @@ public class UserEntity {
     private Date birthDate;
     private String phone;
     private String location;
-    private boolean active = true;
 
 }

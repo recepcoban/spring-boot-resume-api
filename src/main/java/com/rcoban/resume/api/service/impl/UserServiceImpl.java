@@ -4,6 +4,9 @@ import com.rcoban.resume.api.exception.DataNotFoundException;
 import com.rcoban.resume.api.exception.RequiredFieldException;
 import com.rcoban.resume.api.model.dto.UserDto;
 import com.rcoban.resume.api.model.mapper.UserMapper;
+import com.rcoban.resume.api.model.response.BaseResponse;
+import com.rcoban.resume.api.model.response.MessageResponse;
+import com.rcoban.resume.api.model.response.UserResponse;
 import com.rcoban.resume.api.repository.UserRepository;
 import com.rcoban.resume.api.service.UserService;
 import com.rcoban.resume.api.utils.MessageUtil;
@@ -22,39 +25,42 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     @Override
-    public UserDto getUserById(String email) {
+    public UserResponse getUserById(String email) {
         if (!StringUtils.hasText(email)) {
-            throw new RequiredFieldException(MessageUtil.EMAIL_IS_REQUIRED.getCode());
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.EMAIL_IS_REQUIRED)).build();
         }
 
-        return Optional.of(userRepository.findById(email))
+        UserDto userDto = Optional.of(userRepository.findById(email))
                 .get()
                 .map(userMapper::userEntityToUserDto)
-                .orElseThrow(() -> new DataNotFoundException(MessageUtil.DATA_NOT_FOUND.getCode()));
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build());
+
+        UserResponse userResponse = UserResponse.builder().user(userDto).build();
+        userResponse.addSuccessMessage();
+        return userResponse;
     }
 
     @Override
-    public UserDto createNewUser(UserDto userDto) {
-        if (!StringUtils.hasText(userDto.getEmail())) {
-            throw new RequiredFieldException(MessageUtil.EMAIL_IS_REQUIRED.getCode());
-        }
+    public UserResponse createNewUser(UserDto userDto) {
+        userDto = Optional.of(userRepository.save(userMapper.userDtoToUserEntity(userDto))).map(userMapper::userEntityToUserDto).orElse(null);
 
-        return Optional.of(userRepository.save(userMapper.userDtoToUserEntity(userDto)))
-                .map(userMapper::userEntityToUserDto)
-                .get();
+        UserResponse userResponse = UserResponse.builder().user(userDto).build();
+        userResponse.addSuccessMessage();
+        return userResponse;
     }
 
     @Override
-    public void deleteUserById(String email) {
+    public BaseResponse deleteUserById(String email) {
         if (!StringUtils.hasText(email)) {
-            throw new RequiredFieldException(MessageUtil.EMAIL_IS_REQUIRED.getCode());
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.EMAIL_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(userRepository.findById(email).orElseThrow(() -> new DataNotFoundException(MessageUtil.DATA_NOT_FOUND.getCode())))
-                .ifPresent(userEntity -> {
-                    userEntity.setActive(false);
-                    userRepository.save(userEntity);
-                });
+        Optional.ofNullable(userRepository.findById(email).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(userRepository::delete);
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.addSuccessMessage();
+        return baseResponse;
     }
 
 }

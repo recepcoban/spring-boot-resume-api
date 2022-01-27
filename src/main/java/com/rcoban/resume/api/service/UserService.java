@@ -1,13 +1,15 @@
 package com.rcoban.resume.api.service;
 
 import com.rcoban.resume.api.model.dto.UserDto;
+import com.rcoban.resume.api.model.response.BaseResponse;
+import com.rcoban.resume.api.model.response.UserResponse;
 
 public interface UserService {
 
-    UserDto getUserById(String email);
+    UserResponse getUserById(String email);
 
-    UserDto createNewUser(UserDto userDto);
+    UserResponse createNewUser(UserDto userDto);
 
-    void deleteUserById(String email);
+    BaseResponse deleteUserById(String email);
 
 }
