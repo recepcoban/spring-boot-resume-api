@@ -2,11 +2,9 @@ package com.rcoban.resume.api.model.response;
 
 import com.rcoban.resume.api.model.dto.MessageDto;
 import com.rcoban.resume.api.utils.MessageUtil;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class BaseResponse {
 
     private MessageDto message;

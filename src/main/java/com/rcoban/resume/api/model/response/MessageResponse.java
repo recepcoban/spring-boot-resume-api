@@ -3,15 +3,14 @@ package com.rcoban.resume.api.model.response;
 import com.rcoban.resume.api.model.dto.MessageDto;
 import com.rcoban.resume.api.utils.MessageUtil;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class MessageResponse extends BaseResponse {
 
     private String stackTrace;
