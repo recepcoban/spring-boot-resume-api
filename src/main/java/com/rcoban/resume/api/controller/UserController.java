@@ -23,8 +23,8 @@ public class UserController {
 
     @GetMapping("/{email}")
     @Operation(summary = "Get a user by its email")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable String email) {
-        return ResponseEntity.ok(userService.getUserById(email));
+    public ResponseEntity<UserResponse> getByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.getByEmail(email));
     }
 
     @PostMapping
@@ -33,10 +33,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createNewUser(userDto));
     }
 
-    @DeleteMapping("/{email}")
-    @Operation(summary = "Delete a user by its email")
-    public ResponseEntity<BaseResponse> deleteUserById(@PathVariable String email) {
-        return ResponseEntity.ok(userService.deleteUserById(email));
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a user by its id")
+    public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.deleteById(id));
     }
 
 }

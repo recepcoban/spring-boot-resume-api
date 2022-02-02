@@ -11,6 +11,8 @@ import java.util.Date;
 @Data
 public class UserDto {
 
+    private Long id;
+
     @NotNull(message = "Email address can not be null")
     @NotEmpty(message = "Email address can not be empty")
     @NotBlank(message = "Email address can not be blank")
@@ -23,5 +25,6 @@ public class UserDto {
     private Date birthDate;
     private String phone;
     private String location;
+    private String summary;
 
 }

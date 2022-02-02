@@ -15,6 +15,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -25,14 +26,30 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     @Override
-    public UserResponse getUserById(String email) {
+    public UserResponse getById(Long id) {
+        if (Objects.isNull(id)) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        UserDto userDto = Optional.of(userRepository.findById(id))
+                .get()
+                .map(userMapper::entityToDto)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build());
+
+        UserResponse userResponse = UserResponse.builder().user(userDto).build();
+        userResponse.addSuccessMessage();
+        return userResponse;
+    }
+
+    @Override
+    public UserResponse getByEmail(String email) {
         if (!StringUtils.hasText(email)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.EMAIL_IS_REQUIRED)).build();
         }
 
-        UserDto userDto = Optional.of(userRepository.findById(email))
+        UserDto userDto = Optional.of(userRepository.findByEmail(email))
                 .get()
-                .map(userMapper::userEntityToUserDto)
+                .map(userMapper::entityToDto)
                 .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build());
 
         UserResponse userResponse = UserResponse.builder().user(userDto).build();
@@ -42,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse createNewUser(UserDto userDto) {
-        userDto = Optional.of(userRepository.save(userMapper.userDtoToUserEntity(userDto))).map(userMapper::userEntityToUserDto).orElse(null);
+        userDto = Optional.of(userRepository.save(userMapper.dtoToEntity(userDto))).map(userMapper::entityToDto).orElse(null);
 
         UserResponse userResponse = UserResponse.builder().user(userDto).build();
         userResponse.addSuccessMessage();
@@ -50,12 +67,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BaseResponse deleteUserById(String email) {
-        if (!StringUtils.hasText(email)) {
-            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.EMAIL_IS_REQUIRED)).build();
+    public BaseResponse deleteById(Long id) {
+        if (Objects.isNull(id)) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(userRepository.findById(email).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(userRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();
