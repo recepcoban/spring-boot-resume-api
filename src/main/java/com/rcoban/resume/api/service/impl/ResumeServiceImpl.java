@@ -61,4 +61,32 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeResponse;
     }
 
+    @Override
+    public ResumeResponse getDefaultResume() {
+        UserResponse userResponse = userService.getDefaultUser();
+        List<CertificationDto> certifications = certificationService.getDefaultCertifications();
+        List<CourseDto> courses = courseService.getDefaultCourses();
+        List<EducationDto> educations = educationService.getDefaultEducations();
+        List<ExperienceDto> experiences = experienceService.getDefaultExperiences();
+        List<HobbyDto> hobbies = hobbyService.getDefaultHobbies();
+        List<LanguageDto> languages = languageService.getDefaultLanguages();
+        List<ProjectDto> projects = projectService.getDefaultProjects();
+        List<SkillDto> skills = skillService.getDefaultSkills();
+        List<SocialMediaDto> socialMedias = socialMediaService.getDefaultSocialMedias();
+
+        ResumeResponse resumeResponse = ResumeResponse.builder()
+                .user(userResponse.getUser())
+                .certifications(certifications)
+                .courses(courses)
+                .educations(educations)
+                .experiences(experiences)
+                .hobbies(hobbies)
+                .languages(languages)
+                .projects(projects)
+                .skills(skills)
+                .socialMedias(socialMedias)
+                .build();
+        resumeResponse.addSuccessMessage();
+        return resumeResponse;
+    }
 }

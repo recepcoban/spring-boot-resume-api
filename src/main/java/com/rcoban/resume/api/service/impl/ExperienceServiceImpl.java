@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +80,37 @@ public class ExperienceServiceImpl implements ExperienceService {
         return baseResponse;
     }
 
+    @Override
+    public List<ExperienceDto> getDefaultExperiences() {
+        List<ExperienceDto> experiences = new ArrayList<>();
+
+        ExperienceDto mapfre = ExperienceDto.builder()
+                .id(1L)
+                .userId(1L)
+                .startDate(LocalDate.of(2015, 11, 1))
+                .endDate(LocalDate.of(2017, 2, 1))
+                .employer("Mapfre Insurance - mapfre.com.tr")
+                .position("Software Developer")
+                .responsibilities("Developing and maintaining an insurance project.\n" +
+                        "Developing with Java, JSF, Web services(SOAP), Oracle.")
+                .build();
+
+        ExperienceDto yapiKredi = ExperienceDto.builder()
+                .id(2L)
+                .userId(1L)
+                .startDate(LocalDate.of(2017, 3, 1))
+                .endDate(LocalDate.now())
+                .employer("Yapı Kredi Bank - yapikredi.com.tr")
+                .position("Senior Software Developer")
+                .responsibilities("Working with Insurance Department.\n" +
+                        "Developing and maintaining a detailed banking and insurance project.\n" +
+                        "Developing with Java, Spring Boot, Web services(SOAP, Rest), Oracle, React Js. Html,\n" +
+                        "Css(Bootstrap, Ant Design).")
+                .build();
+
+        experiences.add(mapfre);
+        experiences.add(yapiKredi);
+
+        return experiences;
+    }
 }

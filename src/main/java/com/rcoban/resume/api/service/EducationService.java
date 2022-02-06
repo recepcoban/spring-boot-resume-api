@@ -16,4 +16,6 @@ public interface EducationService {
 
     BaseResponse deleteById(Long id);
 
+    List<EducationDto> getDefaultEducations();
+
 }

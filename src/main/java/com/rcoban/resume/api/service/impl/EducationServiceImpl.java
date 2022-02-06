@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +79,21 @@ public class EducationServiceImpl implements EducationService {
         return baseResponse;
     }
 
+    @Override
+    public List<EducationDto> getDefaultEducations() {
+        List<EducationDto> educations = new ArrayList<>();
+
+        EducationDto istanbulUniversity = EducationDto.builder()
+                .id(1L)
+                .userId(1L)
+                .startYear("2010")
+                .endYear("2015")
+                .schoolName("Istanbul University")
+                .departmentName("Computer Engineering")
+                .build();
+
+        educations.add(istanbulUniversity);
+
+        return educations;
+    }
 }

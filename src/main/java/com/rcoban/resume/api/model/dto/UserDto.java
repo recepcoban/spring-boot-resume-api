@@ -1,14 +1,18 @@
 package com.rcoban.resume.api.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
+@Builder
+@AllArgsConstructor
 public class UserDto {
 
     private Long id;
@@ -22,7 +26,8 @@ public class UserDto {
     @NotNull(message = "Full Name can not be null")
     private String fullName;
 
-    private Date birthDate;
+    private String title;
+    private LocalDate birthDate;
     private String phone;
     private String location;
     private String summary;

@@ -15,6 +15,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -80,4 +81,26 @@ public class UserServiceImpl implements UserService {
         return baseResponse;
     }
 
+    @Override
+    public UserResponse getDefaultUser() {
+        UserDto userDto = UserDto.builder()
+                .id(1L)
+                .email("recep.coban@mail.com")
+                .title("Senior Software Engineer")
+                .fullName("Recep Çoban")
+                .birthDate(LocalDate.of(1989, 3, 2))
+                .phone("90 123 45 6789")
+                .location("Istanbul / Turkey")
+                .summary("Someone who has more than six years of insurance/banking experience,\n" +
+                        "Someone who loves to travel,\n" +
+                        "Someone who loves to read books,\n" +
+                        "Someone who loves cats and dogs\n" +
+                        "Someone who wants to improve himself about new technologies\n" +
+                        "Someone who loves to watch movies, tv series and documentaries")
+                .build();
+
+        UserResponse userResponse = UserResponse.builder().user(userDto).build();
+        userResponse.addSuccessMessage();
+        return userResponse;
+    }
 }

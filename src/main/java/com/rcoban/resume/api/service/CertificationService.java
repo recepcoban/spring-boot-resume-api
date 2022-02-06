@@ -16,4 +16,6 @@ public interface CertificationService {
 
     BaseResponse deleteById(Long id);
 
+    List<CertificationDto> getDefaultCertifications();
+
 }

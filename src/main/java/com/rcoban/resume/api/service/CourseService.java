@@ -16,4 +16,6 @@ public interface CourseService {
 
     BaseResponse deleteById(Long id);
 
+    List<CourseDto> getDefaultCourses();
+
 }

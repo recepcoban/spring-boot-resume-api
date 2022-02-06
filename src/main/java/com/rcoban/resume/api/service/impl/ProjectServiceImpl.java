@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +79,54 @@ public class ProjectServiceImpl implements ProjectService {
         return baseResponse;
     }
 
+    @Override
+    public List<ProjectDto> getDefaultProjects() {
+        List<ProjectDto> projects = new ArrayList<>();
+
+        ProjectDto insurance = ProjectDto.builder()
+                .id(1L)
+                .userId(1L)
+                .name("Yapı Kredi Bank - Bancassurance")
+                .url(null)
+                .details("- This is an Insurance Project of the Insurance Department which includes many products. Such as belows;\n" +
+                        "* My Goods Insurance\n" +
+                        "* My Work Insurance\n" +
+                        "* Health Insurance\n" +
+                        "* Natural Disaster Insurance\n" +
+                        "* Motor Insurance\n" +
+                        "* Life Insurance\n" +
+                        "* Private Pension System\n" +
+                        "- Developing and maintaining all of the products of the project.\n" +
+                        "- Working on every process of the products. Backend, frontend, database.\n" +
+                        "- Developing with Java, Spring Boot, Rest, SOAP, React Js, Oracle, Harmoni(Framework based on Java, Spring, Html,\n" +
+                        "Css, Bootstrap)")
+                .build();
+
+        ProjectDto offerte = ProjectDto.builder()
+                .id(2L)
+                .userId(1L)
+                .name("Offerte - ePunkt(Freelance)")
+                .url("www.offerte-epunkt.ch")
+                .details("- A company which is works for cleaning, moving, painting and flooring business line.\n" +
+                        "- I worked on backend, frontend and database of the project as a fullstack developer.\n" +
+                        "- Developing with C#, ASP.NET, MSSQL, HTML, CSS(Bootstrap).")
+                .build();
+
+        ProjectDto socialMedia = ProjectDto.builder()
+                .id(3L)
+                .userId(1L)
+                .name("Social Media Monitoring System")
+                .url(null)
+                .details("- Searching with some special keyword on social media like facebook, twitter etc.\n" +
+                        "- Reporting data with data visualization tools.\n" +
+                        "- Developing with Java, MySQL.\n" +
+                        "- Using apigee.com's APIs.")
+                .build();
+
+        projects.add(insurance);
+        projects.add(offerte);
+        projects.add(socialMedia);
+
+        return projects;
+    }
 }

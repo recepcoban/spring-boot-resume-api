@@ -3,6 +3,7 @@ package com.rcoban.resume.api.service.impl;
 import com.rcoban.resume.api.exception.DataNotFoundException;
 import com.rcoban.resume.api.exception.RequiredFieldException;
 import com.rcoban.resume.api.model.dto.SkillDto;
+import com.rcoban.resume.api.model.enums.LevelType;
 import com.rcoban.resume.api.model.mapper.SkillMapper;
 import com.rcoban.resume.api.model.response.BaseResponse;
 import com.rcoban.resume.api.model.response.MessageResponse;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +80,51 @@ public class SkillServiceImpl implements SkillService {
         return baseResponse;
     }
 
+    @Override
+    public List<SkillDto> getDefaultSkills() {
+        List<SkillDto> skills = new ArrayList<>();
+
+        SkillDto java = SkillDto.builder()
+                .id(1L)
+                .userId(1L)
+                .name("Java")
+                .level(LevelType.ADVANCED)
+                .build();
+
+        SkillDto springBoot = SkillDto.builder()
+                .id(2L)
+                .userId(1L)
+                .name("Spring Boot")
+                .level(LevelType.ADVANCED)
+                .build();
+
+        SkillDto webServices = SkillDto.builder()
+                .id(3L)
+                .userId(1L)
+                .name("Web Services(SOAP, REST)")
+                .level(LevelType.ADVANCED)
+                .build();
+
+        SkillDto atlassian = SkillDto.builder()
+                .id(4L)
+                .userId(1L)
+                .name("Atlassian(JIRA, Bitbucket, Bamboo)")
+                .level(LevelType.ADVANCED)
+                .build();
+
+        SkillDto reactJs = SkillDto.builder()
+                .id(5L)
+                .userId(1L)
+                .name("React Js")
+                .level(LevelType.UPPER_INTERMEDIATE)
+                .build();
+
+        skills.add(java);
+        skills.add(springBoot);
+        skills.add(webServices);
+        skills.add(atlassian);
+        skills.add(reactJs);
+
+        return skills;
+    }
 }

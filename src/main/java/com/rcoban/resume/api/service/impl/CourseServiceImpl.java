@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +79,27 @@ public class CourseServiceImpl implements CourseService {
         return baseResponse;
     }
 
+    @Override
+    public List<CourseDto> getDefaultCourses() {
+        List<CourseDto> courses = new ArrayList<>();
+
+        CourseDto bilgincAcademy = CourseDto.builder()
+                .id(1L)
+                .userId(1L)
+                .name("Building Applications with Microservices, Docker and Spring Boot")
+                .provider("Bilginç IT Academy")
+                .build();
+
+        CourseDto linuxSummerSchool = CourseDto.builder()
+                .id(2L)
+                .userId(1L)
+                .name("Spring Framework & Hibernate")
+                .provider("Linux Summer School")
+                .build();
+
+        courses.add(bilgincAcademy);
+        courses.add(linuxSummerSchool);
+
+        return courses;
+    }
 }

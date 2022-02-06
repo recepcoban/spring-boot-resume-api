@@ -16,4 +16,6 @@ public interface ProjectService {
 
     BaseResponse deleteById(Long id);
 
+    List<ProjectDto> getDefaultProjects();
+
 }

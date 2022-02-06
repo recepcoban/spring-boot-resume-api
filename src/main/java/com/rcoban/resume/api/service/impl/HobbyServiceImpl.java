@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +79,46 @@ public class HobbyServiceImpl implements HobbyService {
         return baseResponse;
     }
 
+    @Override
+    public List<HobbyDto> getDefaultHobbies() {
+        List<HobbyDto> hobbies = new ArrayList<>();
+
+        HobbyDto technology = HobbyDto.builder()
+                .id(1L)
+                .userId(1L)
+                .name("Technology")
+                .build();
+
+        HobbyDto coding = HobbyDto.builder()
+                .id(2L)
+                .userId(1L)
+                .name("Coding")
+                .build();
+
+        HobbyDto basketball = HobbyDto.builder()
+                .id(3L)
+                .userId(1L)
+                .name("Basketball")
+                .build();
+
+        HobbyDto cycling = HobbyDto.builder()
+                .id(4L)
+                .userId(1L)
+                .name("Cycling")
+                .build();
+
+        HobbyDto nature = HobbyDto.builder()
+                .id(5L)
+                .userId(1L)
+                .name("Nature")
+                .build();
+
+        hobbies.add(technology);
+        hobbies.add(coding);
+        hobbies.add(basketball);
+        hobbies.add(cycling);
+        hobbies.add(nature);
+
+        return hobbies;
+    }
 }

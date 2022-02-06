@@ -3,6 +3,7 @@ package com.rcoban.resume.api.service.impl;
 import com.rcoban.resume.api.exception.DataNotFoundException;
 import com.rcoban.resume.api.exception.RequiredFieldException;
 import com.rcoban.resume.api.model.dto.LanguageDto;
+import com.rcoban.resume.api.model.enums.LevelType;
 import com.rcoban.resume.api.model.mapper.LanguageMapper;
 import com.rcoban.resume.api.model.response.BaseResponse;
 import com.rcoban.resume.api.model.response.LanguageResponse;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +80,27 @@ public class LanguageServiceImpl implements LanguageService {
         return baseResponse;
     }
 
+    @Override
+    public List<LanguageDto> getDefaultLanguages() {
+        List<LanguageDto> languages = new ArrayList<>();
+
+        LanguageDto english = LanguageDto.builder()
+                .id(1L)
+                .userId(1L)
+                .name("English")
+                .level(LevelType.ADVANCED)
+                .build();
+
+        LanguageDto turkish = LanguageDto.builder()
+                .id(2L)
+                .userId(1L)
+                .name("Turkish")
+                .level(LevelType.PROFICIENT)
+                .build();
+
+        languages.add(english);
+        languages.add(turkish);
+
+        return languages;
+    }
 }

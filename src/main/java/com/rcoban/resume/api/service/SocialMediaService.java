@@ -16,4 +16,6 @@ public interface SocialMediaService {
 
     BaseResponse deleteById(Long id);
 
+    List<SocialMediaDto> getDefaultSocialMedias();
+
 }

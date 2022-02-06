@@ -6,4 +6,6 @@ public interface ResumeService {
 
     ResumeResponse getResumeByUserEmail(String email);
 
+    ResumeResponse getDefaultResume();
+
 }

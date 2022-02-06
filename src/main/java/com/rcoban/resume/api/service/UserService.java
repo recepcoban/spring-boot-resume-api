@@ -14,4 +14,6 @@ public interface UserService {
 
     BaseResponse deleteById(Long id);
 
+    UserResponse getDefaultUser();
+
 }

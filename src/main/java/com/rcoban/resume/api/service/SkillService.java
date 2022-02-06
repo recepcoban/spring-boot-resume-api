@@ -16,4 +16,6 @@ public interface SkillService {
 
     BaseResponse deleteById(Long id);
 
+    List<SkillDto> getDefaultSkills();
+
 }

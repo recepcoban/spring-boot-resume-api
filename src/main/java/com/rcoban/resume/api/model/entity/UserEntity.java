@@ -3,7 +3,7 @@ package com.rcoban.resume.api.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -17,8 +17,9 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
 
+    private String title;
     private String fullName;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String phone;
     private String location;
     private String summary;

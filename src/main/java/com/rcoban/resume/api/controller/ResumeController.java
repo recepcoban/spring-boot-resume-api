@@ -25,4 +25,10 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumeByUserEmail(email));
     }
 
+    @GetMapping("/default")
+    @Operation(summary = "Get a default resume")
+    public ResponseEntity<ResumeResponse> getDefaultResume() {
+        return ResponseEntity.ok(resumeService.getDefaultResume());
+    }
+
 }

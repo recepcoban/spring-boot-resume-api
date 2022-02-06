@@ -3,6 +3,7 @@ package com.rcoban.resume.api.service.impl;
 import com.rcoban.resume.api.exception.DataNotFoundException;
 import com.rcoban.resume.api.exception.RequiredFieldException;
 import com.rcoban.resume.api.model.dto.SocialMediaDto;
+import com.rcoban.resume.api.model.enums.SocialMediaType;
 import com.rcoban.resume.api.model.mapper.SocialMediaMapper;
 import com.rcoban.resume.api.model.response.BaseResponse;
 import com.rcoban.resume.api.model.response.MessageResponse;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +80,27 @@ public class SocialMediaServiceImpl implements SocialMediaService {
         return baseResponse;
     }
 
+    @Override
+    public List<SocialMediaDto> getDefaultSocialMedias() {
+        List<SocialMediaDto> socialMedias = new ArrayList<>();
+
+        SocialMediaDto linkedin = SocialMediaDto.builder()
+                .id(1L)
+                .userId(1L)
+                .type(SocialMediaType.LINKEDIN)
+                .url("linkedin.com/in/recepcoban")
+                .build();
+
+        SocialMediaDto github = SocialMediaDto.builder()
+                .id(1L)
+                .userId(1L)
+                .type(SocialMediaType.GITHUB)
+                .url("github.com/recepcoban")
+                .build();
+
+        socialMedias.add(linkedin);
+        socialMedias.add(github);
+
+        return socialMedias;
+    }
 }

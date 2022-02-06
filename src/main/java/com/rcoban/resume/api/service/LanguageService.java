@@ -16,4 +16,6 @@ public interface LanguageService {
 
     BaseResponse deleteById(Long id);
 
+    List<LanguageDto> getDefaultLanguages();
+
 }

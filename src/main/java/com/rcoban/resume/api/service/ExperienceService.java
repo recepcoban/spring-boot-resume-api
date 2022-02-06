@@ -16,4 +16,6 @@ public interface ExperienceService {
 
     BaseResponse deleteById(Long id);
 
+    List<ExperienceDto> getDefaultExperiences();
+
 }

@@ -16,4 +16,6 @@ public interface HobbyService {
 
     BaseResponse deleteById(Long id);
 
+    List<HobbyDto> getDefaultHobbies();
+
 }

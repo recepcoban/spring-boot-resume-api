@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -78,4 +79,29 @@ public class CertificationServiceImpl implements CertificationService {
         return baseResponse;
     }
 
+    @Override
+    public List<CertificationDto> getDefaultCertifications() {
+        List<CertificationDto> certifications = new ArrayList<>();
+
+        CertificationDto oracle = CertificationDto.builder()
+                .id(1L)
+                .userId(1L)
+                .name("Oracle Certified Associate, Java SE 8 Programmer")
+                .provider("Oracle")
+                .url("https://www.credly.com/badges/7ed48c34-aa04-4920-806e-3d7696f5c806")
+                .build();
+
+        CertificationDto bilgincAcademy = CertificationDto.builder()
+                .id(2L)
+                .userId(1L)
+                .name("Building Applications with Microservices, Docker and Spring Boot")
+                .provider("Bilginç IT Academy")
+                .url("https://bilginc.com/evaluation/view/BC000267312")
+                .build();
+
+        certifications.add(oracle);
+        certifications.add(bilgincAcademy);
+
+        return certifications;
+    }
 }
