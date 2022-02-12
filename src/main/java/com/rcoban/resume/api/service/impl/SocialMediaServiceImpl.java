@@ -92,7 +92,7 @@ public class SocialMediaServiceImpl implements SocialMediaService {
                 .build();
 
         SocialMediaDto github = SocialMediaDto.builder()
-                .id(1L)
+                .id(2L)
                 .userId(1L)
                 .type(SocialMediaType.GITHUB)
                 .url("github.com/recepcoban")
