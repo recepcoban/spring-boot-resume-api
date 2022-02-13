@@ -29,6 +29,7 @@ public class UserDto {
     private String fullName;
 
     private String title;
+    private String employer;
     private LocalDate birthDate;
     private String phone;
     private String location;

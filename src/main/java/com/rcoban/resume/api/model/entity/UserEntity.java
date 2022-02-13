@@ -19,6 +19,7 @@ public class UserEntity {
 
     private String title;
     private String fullName;
+    private String employer;
     private LocalDate birthDate;
     private String phone;
     private String location;

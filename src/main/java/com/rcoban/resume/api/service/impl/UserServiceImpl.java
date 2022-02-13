@@ -88,15 +88,17 @@ public class UserServiceImpl implements UserService {
                 .email("recep.coban@mail.com")
                 .title("Senior Software Engineer")
                 .fullName("Recep Çoban")
+                .employer("Yapı Kredi Technology")
                 .birthDate(LocalDate.of(1989, 3, 2))
                 .phone("90 123 45 6789")
                 .location("Istanbul / Turkey")
-                .summary("Someone who has more than six years of insurance/banking experience,\n" +
-                        "Someone who loves to travel,\n" +
-                        "Someone who loves to read books,\n" +
-                        "Someone who loves cats and dogs\n" +
-                        "Someone who wants to improve himself about new technologies\n" +
-                        "Someone who loves to watch movies, tv series and documentaries")
+                .summary("Someone, " +
+                        "who has more than six years of insurance/banking experience,\n" +
+                        "who loves to travel,\n" +
+                        "who loves to read books,\n" +
+                        "who loves cats and dogs,\n" +
+                        "who wants to improve himself about new technologies,\n" +
+                        "who loves to watch movies, tv series and documentaries.")
                 .build();
 
         UserResponse userResponse = UserResponse.builder().user(userDto).build();
