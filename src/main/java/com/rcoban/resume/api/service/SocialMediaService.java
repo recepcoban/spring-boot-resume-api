@@ -14,6 +14,8 @@ public interface SocialMediaService {
 
     SocialMediaResponse createNewSocialMedia(SocialMediaDto socialMediaDto);
 
+    SocialMediaResponse updateById(SocialMediaDto socialMediaDto);
+
     BaseResponse deleteById(Long id);
 
     List<SocialMediaDto> getDefaultSocialMedias();

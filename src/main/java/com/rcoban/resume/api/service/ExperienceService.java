@@ -14,6 +14,8 @@ public interface ExperienceService {
 
     ExperienceResponse createNewExperience(ExperienceDto experienceDto);
 
+    ExperienceResponse updateById(ExperienceDto experienceDto);
+
     BaseResponse deleteById(Long id);
 
     List<ExperienceDto> getDefaultExperiences();

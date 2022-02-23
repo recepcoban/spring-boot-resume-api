@@ -14,6 +14,8 @@ public interface CourseService {
 
     CourseResponse createNewCourse(CourseDto courseDto);
 
+    CourseResponse updateById(CourseDto courseDto);
+
     BaseResponse deleteById(Long id);
 
     List<CourseDto> getDefaultCourses();

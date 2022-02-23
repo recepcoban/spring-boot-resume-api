@@ -3,10 +3,7 @@ package com.rcoban.resume.api.model.entity;
 import com.rcoban.resume.api.model.enums.SocialMediaType;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -18,6 +15,8 @@ public class SocialMediaEntity {
     private Long id;
 
     private Long userId;
+
+    @Enumerated(EnumType.STRING)
     private SocialMediaType type;
     private String url;
 

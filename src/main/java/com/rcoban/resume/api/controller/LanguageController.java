@@ -34,6 +34,12 @@ public class LanguageController {
         return ResponseEntity.status(HttpStatus.CREATED).body(languageService.createNewLanguage(languageDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a language by its id")
+    public ResponseEntity<LanguageResponse> updateById(@RequestBody @Valid LanguageDto languageDto) {
+        return ResponseEntity.ok(languageService.updateById(languageDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a language by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

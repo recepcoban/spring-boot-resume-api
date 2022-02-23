@@ -66,12 +66,28 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     @Override
+    public HobbyResponse updateById(HobbyDto hobbyDto) {
+        if (Objects.isNull(hobbyDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(hobbyRepository.findById(hobbyDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> hobbyRepository.save(hobbyMapper.dtoToEntity(hobbyDto)));
+
+        HobbyResponse hobbyResponse = HobbyResponse.builder().hobby(hobbyDto).build();
+        hobbyResponse.addSuccessMessage();
+        return hobbyResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(hobbyRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(hobbyRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(hobbyRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();

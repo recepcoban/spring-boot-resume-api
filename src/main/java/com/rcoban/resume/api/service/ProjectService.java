@@ -14,6 +14,8 @@ public interface ProjectService {
 
     ProjectResponse createNewProject(ProjectDto projectDto);
 
+    ProjectResponse updateById(ProjectDto projectDto);
+
     BaseResponse deleteById(Long id);
 
     List<ProjectDto> getDefaultProjects();

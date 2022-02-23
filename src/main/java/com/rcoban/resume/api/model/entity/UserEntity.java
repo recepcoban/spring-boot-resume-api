@@ -23,6 +23,8 @@ public class UserEntity {
     private LocalDate birthDate;
     private String phone;
     private String location;
+
+    @Column(length = 4000)
     private String summary;
 
 }

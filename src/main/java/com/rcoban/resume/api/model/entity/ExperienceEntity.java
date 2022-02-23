@@ -2,10 +2,7 @@ package com.rcoban.resume.api.model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -21,7 +18,12 @@ public class ExperienceEntity {
     private LocalDate startDate;
     private LocalDate endDate;
     private String employer;
+    private String url;
     private String position;
+
+    @Column(length = 4000)
     private String responsibilities;
+
+    private boolean active;
 
 }

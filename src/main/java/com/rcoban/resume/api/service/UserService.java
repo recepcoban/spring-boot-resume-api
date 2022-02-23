@@ -12,6 +12,8 @@ public interface UserService {
 
     UserResponse createNewUser(UserDto userDto);
 
+    UserResponse updateById(UserDto userDto);
+
     BaseResponse deleteById(Long id);
 
     UserResponse getDefaultUser();

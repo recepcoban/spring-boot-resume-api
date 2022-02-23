@@ -34,6 +34,12 @@ public class SkillController {
         return ResponseEntity.status(HttpStatus.CREATED).body(skillService.createNewSkill(skillDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a skill by its id")
+    public ResponseEntity<SkillResponse> updateById(@RequestBody @Valid SkillDto skillDto) {
+        return ResponseEntity.ok(skillService.updateById(skillDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a skill by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

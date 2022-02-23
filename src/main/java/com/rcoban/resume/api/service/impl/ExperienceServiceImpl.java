@@ -67,12 +67,28 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
+    public ExperienceResponse updateById(ExperienceDto experienceDto) {
+        if (Objects.isNull(experienceDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(experienceRepository.findById(experienceDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> experienceRepository.save(experienceMapper.dtoToEntity(experienceDto)));
+
+        ExperienceResponse experienceResponse = ExperienceResponse.builder().experience(experienceDto).build();
+        experienceResponse.addSuccessMessage();
+        return experienceResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(experienceRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(experienceRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(experienceRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();
@@ -89,10 +105,10 @@ public class ExperienceServiceImpl implements ExperienceService {
                 .userId(1L)
                 .startDate(LocalDate.of(2015, 11, 1))
                 .endDate(LocalDate.of(2017, 2, 1))
-                .employer("Mapfre Insurance - mapfre.com.tr")
+                .employer("Mapfre Insurance")
+                .url("https://www.mapfre.com.tr")
                 .position("Software Developer")
-                .responsibilities("Developing and maintaining an insurance project.\n" +
-                        "Developing with Java, JSF, Web services(SOAP), Oracle.")
+                .responsibilities("Developing and maintaining an insurance project. Developing with Java, JSF, Web services(SOAP), Oracle.")
                 .build();
 
         ExperienceDto yapiKredi = ExperienceDto.builder()
@@ -101,10 +117,11 @@ public class ExperienceServiceImpl implements ExperienceService {
                 .startDate(LocalDate.of(2017, 3, 1))
                 .endDate(LocalDate.now())
                 .employer("Yapı Kredi Bank - yapikredi.com.tr")
+                .url("https://www.yapikredi.com.tr")
                 .position("Senior Software Developer")
-                .responsibilities("Working with Insurance Department.\n" +
-                        "Developing and maintaining a detailed banking and insurance project.\n" +
-                        "Developing with Java, Spring Boot, Web services(SOAP, Rest), Oracle, React Js. Html,\n" +
+                .responsibilities("Working with Insurance Department. " +
+                        "Developing and maintaining a detailed banking and insurance project. " +
+                        "Developing with Java, Spring Boot, Web services(SOAP, Rest), Oracle, React Js. Html, " +
                         "Css(Bootstrap, Ant Design).")
                 .build();
 

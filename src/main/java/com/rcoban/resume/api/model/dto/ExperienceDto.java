@@ -18,7 +18,9 @@ public class ExperienceDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private String employer;
+    private String url;
     private String position;
     private String responsibilities;
+    private boolean active;
 
 }

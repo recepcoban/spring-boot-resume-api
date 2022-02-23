@@ -66,12 +66,28 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
+    public EducationResponse updateById(EducationDto educationDto) {
+        if (Objects.isNull(educationDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(educationRepository.findById(educationDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> educationRepository.save(educationMapper.dtoToEntity(educationDto)));
+
+        EducationResponse educationResponse = EducationResponse.builder().education(educationDto).build();
+        educationResponse.addSuccessMessage();
+        return educationResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(educationRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(educationRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(educationRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();

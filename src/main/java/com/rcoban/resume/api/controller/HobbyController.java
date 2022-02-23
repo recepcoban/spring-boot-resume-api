@@ -34,6 +34,12 @@ public class HobbyController {
         return ResponseEntity.status(HttpStatus.CREATED).body(hobbyService.createNewHobby(hobbyDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a hobby by its id")
+    public ResponseEntity<HobbyResponse> updateById(@RequestBody @Valid HobbyDto hobbyDto) {
+        return ResponseEntity.ok(hobbyService.updateById(hobbyDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a hobby by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

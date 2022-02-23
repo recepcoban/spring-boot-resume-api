@@ -14,6 +14,8 @@ public interface EducationService {
 
     EducationResponse createNewEducation(EducationDto educationDto);
 
+    EducationResponse updateById(EducationDto educationDto);
+
     BaseResponse deleteById(Long id);
 
     List<EducationDto> getDefaultEducations();

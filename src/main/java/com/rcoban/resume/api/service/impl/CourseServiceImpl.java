@@ -66,12 +66,28 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public CourseResponse updateById(CourseDto courseDto) {
+        if (Objects.isNull(courseDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(courseRepository.findById(courseDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> courseRepository.save(courseMapper.dtoToEntity(courseDto)));
+
+        CourseResponse courseResponse = CourseResponse.builder().course(courseDto).build();
+        courseResponse.addSuccessMessage();
+        return courseResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(courseRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(courseRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(courseRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();
@@ -97,8 +113,16 @@ public class CourseServiceImpl implements CourseService {
                 .provider("Linux Summer School")
                 .build();
 
+        CourseDto wissenAkademie = CourseDto.builder()
+                .id(3L)
+                .userId(1L)
+                .name("Java & Database")
+                .provider("Wissen Akademie")
+                .build();
+
         courses.add(bilgincAcademy);
         courses.add(linuxSummerSchool);
+        courses.add(wissenAkademie);
 
         return courses;
     }

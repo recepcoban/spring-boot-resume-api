@@ -14,6 +14,8 @@ public interface CertificationService {
 
     CertificationResponse createNewCertification(CertificationDto certificationDto);
 
+    CertificationResponse updateById(CertificationDto certificationDto);
+
     BaseResponse deleteById(Long id);
 
     List<CertificationDto> getDefaultCertifications();

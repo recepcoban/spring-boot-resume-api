@@ -14,6 +14,8 @@ public interface HobbyService {
 
     HobbyResponse createNewHobby(HobbyDto hobbyDto);
 
+    HobbyResponse updateById(HobbyDto hobbyDto);
+
     BaseResponse deleteById(Long id);
 
     List<HobbyDto> getDefaultHobbies();

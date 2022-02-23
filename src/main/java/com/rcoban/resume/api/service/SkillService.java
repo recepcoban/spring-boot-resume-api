@@ -14,6 +14,8 @@ public interface SkillService {
 
     SkillResponse createNewSkill(SkillDto skillDto);
 
+    SkillResponse updateById(SkillDto skillDto);
+
     BaseResponse deleteById(Long id);
 
     List<SkillDto> getDefaultSkills();

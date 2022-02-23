@@ -3,10 +3,7 @@ package com.rcoban.resume.api.model.entity;
 import com.rcoban.resume.api.model.enums.LevelType;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -19,6 +16,8 @@ public class LanguageEntity {
 
     private Long userId;
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private LevelType level;
 
 }

@@ -67,12 +67,28 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
+    public SkillResponse updateById(SkillDto skillDto) {
+        if (Objects.isNull(skillDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(skillRepository.findById(skillDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> skillRepository.save(skillMapper.dtoToEntity(skillDto)));
+
+        SkillResponse skillResponse = SkillResponse.builder().skill(skillDto).build();
+        skillResponse.addSuccessMessage();
+        return skillResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(skillRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(skillRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(skillRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();
@@ -88,7 +104,7 @@ public class SkillServiceImpl implements SkillService {
                 .id(1L)
                 .userId(1L)
                 .name("Java")
-                .level(LevelType.ADVANCED)
+                .level(LevelType.PROFICIENT)
                 .build();
 
         SkillDto springBoot = SkillDto.builder()
@@ -102,14 +118,14 @@ public class SkillServiceImpl implements SkillService {
                 .id(3L)
                 .userId(1L)
                 .name("Web Services(SOAP, REST)")
-                .level(LevelType.ADVANCED)
+                .level(LevelType.UPPER_INTERMEDIATE)
                 .build();
 
         SkillDto atlassian = SkillDto.builder()
                 .id(4L)
                 .userId(1L)
                 .name("Atlassian(JIRA, Bitbucket, Bamboo)")
-                .level(LevelType.ADVANCED)
+                .level(LevelType.INTERMEDIATE)
                 .build();
 
         SkillDto reactJs = SkillDto.builder()

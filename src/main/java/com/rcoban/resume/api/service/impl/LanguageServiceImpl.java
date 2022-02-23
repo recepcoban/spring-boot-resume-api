@@ -67,12 +67,28 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
+    public LanguageResponse updateById(LanguageDto languageDto) {
+        if (Objects.isNull(languageDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(languageRepository.findById(languageDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> languageRepository.save(languageMapper.dtoToEntity(languageDto)));
+
+        LanguageResponse languageResponse = LanguageResponse.builder().language(languageDto).build();
+        languageResponse.addSuccessMessage();
+        return languageResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(languageRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(languageRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(languageRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();

@@ -34,6 +34,12 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(projectService.createNewProject(projectDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a project by its id")
+    public ResponseEntity<ProjectResponse> updateById(@RequestBody @Valid ProjectDto projectDto) {
+        return ResponseEntity.ok(projectService.updateById(projectDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a project by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

@@ -34,6 +34,12 @@ public class SocialMediaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(socialMediaService.createNewSocialMedia(socialMediaDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a social media by its id")
+    public ResponseEntity<SocialMediaResponse> updateById(@RequestBody @Valid SocialMediaDto socialMediaDto) {
+        return ResponseEntity.ok(socialMediaService.updateById(socialMediaDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a social media by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

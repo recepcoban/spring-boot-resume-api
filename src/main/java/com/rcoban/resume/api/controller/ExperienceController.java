@@ -34,6 +34,12 @@ public class ExperienceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(experienceService.createNewExperience(experienceDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a experience by its id")
+    public ResponseEntity<ExperienceResponse> updateById(@RequestBody @Valid ExperienceDto experienceDto) {
+        return ResponseEntity.ok(experienceService.updateById(experienceDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a experience by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

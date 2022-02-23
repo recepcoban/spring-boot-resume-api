@@ -33,6 +33,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createNewUser(userDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a user by its id")
+    public ResponseEntity<UserResponse> updateById(@RequestBody @Valid UserDto userDto) {
+        return ResponseEntity.ok(userService.updateById(userDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

@@ -14,6 +14,8 @@ public interface LanguageService {
 
     LanguageResponse createNewLanguage(LanguageDto languageDto);
 
+    LanguageResponse updateById(LanguageDto languageDto);
+
     BaseResponse deleteById(Long id);
 
     List<LanguageDto> getDefaultLanguages();

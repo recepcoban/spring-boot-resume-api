@@ -66,12 +66,28 @@ public class CertificationServiceImpl implements CertificationService {
     }
 
     @Override
+    public CertificationResponse updateById(CertificationDto certificationDto) {
+        if (Objects.isNull(certificationDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(certificationRepository.findById(certificationDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(certificationEntity -> certificationRepository.save(certificationMapper.dtoToEntity(certificationDto)));
+
+        CertificationResponse certificationResponse = CertificationResponse.builder().certification(certificationDto).build();
+        certificationResponse.addSuccessMessage();
+        return certificationResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(certificationRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(certificationRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(certificationRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();

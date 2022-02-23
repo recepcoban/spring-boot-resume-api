@@ -34,6 +34,12 @@ public class CertificationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(certificationService.createNewCertification(certificationDto));
     }
 
+    @PutMapping
+    @Operation(summary = "Update a certification by its id")
+    public ResponseEntity<CertificationResponse> updateById(@RequestBody @Valid CertificationDto certificationDto) {
+        return ResponseEntity.ok(certificationService.updateById(certificationDto));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a certification by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {

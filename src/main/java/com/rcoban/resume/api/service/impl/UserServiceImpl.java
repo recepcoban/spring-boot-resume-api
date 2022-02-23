@@ -68,12 +68,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponse updateById(UserDto userDto) {
+        if (Objects.isNull(userDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(userRepository.findById(userDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> userRepository.save(userMapper.dtoToEntity(userDto)));
+
+        UserResponse userResponse = UserResponse.builder().user(userDto).build();
+        userResponse.addSuccessMessage();
+        return userResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(userRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(userRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(userRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();
@@ -93,11 +109,11 @@ public class UserServiceImpl implements UserService {
                 .phone("90 123 45 6789")
                 .location("Istanbul / Turkey")
                 .summary("Someone, " +
-                        "who has more than six years of insurance/banking experience,\n" +
-                        "who loves to travel,\n" +
-                        "who loves to read books,\n" +
-                        "who loves cats and dogs,\n" +
-                        "who wants to improve himself about new technologies,\n" +
+                        "who has more than six years of insurance/banking experience, " +
+                        "who loves to travel, " +
+                        "who loves to read books, " +
+                        "who loves cats and dogs, " +
+                        "who wants to improve himself about new technologies, " +
                         "who loves to watch movies, tv series and documentaries.")
                 .build();
 

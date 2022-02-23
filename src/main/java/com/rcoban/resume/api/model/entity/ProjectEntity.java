@@ -2,10 +2,7 @@ package com.rcoban.resume.api.model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -19,6 +16,8 @@ public class ProjectEntity {
     private Long userId;
     private String name;
     private String url;
+
+    @Column(length = 4000)
     private String details;
 
 }

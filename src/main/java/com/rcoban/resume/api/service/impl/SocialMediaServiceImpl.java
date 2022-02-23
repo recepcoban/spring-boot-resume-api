@@ -67,12 +67,28 @@ public class SocialMediaServiceImpl implements SocialMediaService {
     }
 
     @Override
+    public SocialMediaResponse updateById(SocialMediaDto socialMediaDto) {
+        if (Objects.isNull(socialMediaDto.getId())) {
+            throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
+        }
+
+        Optional.ofNullable(socialMediaRepository.findById(socialMediaDto.getId())
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+                .ifPresent(courseEntity -> socialMediaRepository.save(socialMediaMapper.dtoToEntity(socialMediaDto)));
+
+        SocialMediaResponse socialMediaResponse = SocialMediaResponse.builder().socialMedia(socialMediaDto).build();
+        socialMediaResponse.addSuccessMessage();
+        return socialMediaResponse;
+    }
+
+    @Override
     public BaseResponse deleteById(Long id) {
         if (Objects.isNull(id)) {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        Optional.ofNullable(socialMediaRepository.findById(id).orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
+        Optional.ofNullable(socialMediaRepository.findById(id)
+                .orElseThrow(() -> DataNotFoundException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.DATA_NOT_FOUND)).build()))
                 .ifPresent(socialMediaRepository::delete);
 
         BaseResponse baseResponse = new BaseResponse();
@@ -88,14 +104,14 @@ public class SocialMediaServiceImpl implements SocialMediaService {
                 .id(1L)
                 .userId(1L)
                 .type(SocialMediaType.LINKEDIN)
-                .url("linkedin.com/in/recepcoban")
+                .url("https://www.linkedin.com/in/recepcoban")
                 .build();
 
         SocialMediaDto github = SocialMediaDto.builder()
                 .id(2L)
                 .userId(1L)
                 .type(SocialMediaType.GITHUB)
-                .url("github.com/recepcoban")
+                .url("https://github.com/recepcoban")
                 .build();
 
         socialMedias.add(linkedin);
