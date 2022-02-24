@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -17,10 +18,10 @@ public class EducationEntity {
     private Long id;
 
     private Long userId;
-    private String startYear;
-    private String endYear;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String schoolName;
     private String departmentName;
-
+    private boolean active;
 
 }

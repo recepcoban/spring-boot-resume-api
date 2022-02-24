@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,7 +50,7 @@ public class EducationServiceImpl implements EducationService {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        return Optional.of(educationRepository.findAllByUserId(userId)
+        return Optional.of(educationRepository.findAllByUserIdOrderByStartDateDesc(userId)
                 .stream()
                 .map(educationMapper::entityToDto)
                 .collect(Collectors.toList()))
@@ -102,13 +103,25 @@ public class EducationServiceImpl implements EducationService {
         EducationDto istanbulUniversity = EducationDto.builder()
                 .id(1L)
                 .userId(1L)
-                .startYear("2010")
-                .endYear("2015")
+                .startDate(LocalDate.of(2010, 9, 17))
+                .endDate(LocalDate.of(2015, 6, 23))
                 .schoolName("Istanbul University")
                 .departmentName("Computer Engineering")
+                .active(false)
+                .build();
+
+        EducationDto universityOfHelloWorld = EducationDto.builder()
+                .id(1L)
+                .userId(1L)
+                .startDate(LocalDate.of(2020, 10, 17))
+                .endDate(LocalDate.of(2022, 6, 23))
+                .schoolName("University of HelloWorld")
+                .departmentName("Computer Science")
+                .active(true)
                 .build();
 
         educations.add(istanbulUniversity);
+        educations.add(universityOfHelloWorld);
 
         return educations;
     }

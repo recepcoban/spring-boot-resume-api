@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -13,10 +15,10 @@ public class EducationDto {
 
     private Long id;
     private Long userId;
-    private String startYear;
-    private String endYear;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String schoolName;
     private String departmentName;
-
+    private boolean active;
 
 }

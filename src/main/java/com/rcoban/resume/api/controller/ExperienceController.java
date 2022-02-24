@@ -35,13 +35,13 @@ public class ExperienceController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a experience")
+    @Operation(summary = "Update an experience")
     public ResponseEntity<ExperienceResponse> updateById(@RequestBody @Valid ExperienceDto experienceDto) {
         return ResponseEntity.ok(experienceService.updateById(experienceDto));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a experience by its id")
+    @Operation(summary = "Delete an experience by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {
         return ResponseEntity.ok(experienceService.deleteById(id));
     }

@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface EducationRepository extends JpaRepository<EducationEntity, Long> {
 
-    List<EducationEntity> findAllByUserId(Long userId);
+    List<EducationEntity> findAllByUserIdOrderByStartDateDesc(Long userId);
 
 }

@@ -16,7 +16,8 @@ INSERT INTO Courses(id, user_id, name, provider) VALUES(1, 1, 'Building Applicat
 INSERT INTO Courses(id, user_id, name, provider) VALUES(2, 1, 'Spring Framework & Hibernate', 'Linux Summer School');
 INSERT INTO Courses(id, user_id, name, provider) VALUES(3, 1, 'Java & Database', 'Wissen Akademie');
 
-INSERT INTO Educations(id, user_id, school_name, department_name, start_year, end_year) VALUES(1, 1, 'Istanbul University', 'Computer Engineering', '2010', '2015');
+INSERT INTO Educations(id, user_id, school_name, department_name, start_date, end_date, active) VALUES(1, 1, 'Istanbul University', 'Computer Engineering', to_date('17-09-2010', 'dd-MM-yyyy'), to_date('23-06-2015', 'dd-MM-yyyy'), false);
+INSERT INTO Educations(id, user_id, school_name, department_name, start_date, end_date, active) VALUES(2, 1, 'University of HelloWorld', 'Computer Science', to_date('17-10-2020', 'dd-MM-yyyy'), to_date('23-06-2022', 'dd-MM-yyyy'), true);
 
 INSERT INTO Experiences(id, user_id, employer, url, position, start_date, end_date, responsibilities, active)
 VALUES(1,

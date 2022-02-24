@@ -35,13 +35,13 @@ public class EducationController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a education")
+    @Operation(summary = "Update an education")
     public ResponseEntity<EducationResponse> updateById(@RequestBody @Valid EducationDto educationDto) {
         return ResponseEntity.ok(educationService.updateById(educationDto));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a education by its id")
+    @Operation(summary = "Delete an education by its id")
     public ResponseEntity<BaseResponse> deleteById(@PathVariable Long id) {
         return ResponseEntity.ok(educationService.deleteById(id));
     }
