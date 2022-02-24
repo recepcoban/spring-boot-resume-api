@@ -7,5 +7,6 @@ public enum SocialMediaType {
     GITHUB,
     INSTAGRAM,
     TWITTER,
-    YOUTUBE
+    YOUTUBE,
+    HACKERRANK
 }

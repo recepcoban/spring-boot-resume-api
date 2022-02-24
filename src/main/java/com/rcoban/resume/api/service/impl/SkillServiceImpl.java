@@ -135,11 +135,19 @@ public class SkillServiceImpl implements SkillService {
                 .level(LevelType.INTERMEDIATE)
                 .build();
 
+        SkillDto oracle = SkillDto.builder()
+                .id(6L)
+                .userId(1L)
+                .name("Oracle")
+                .level(LevelType.ELEMENTARY)
+                .build();
+
         skills.add(java);
         skills.add(springBoot);
         skills.add(webServices);
         skills.add(atlassian);
         skills.add(reactJs);
+        skills.add(oracle);
 
         return skills;
     }

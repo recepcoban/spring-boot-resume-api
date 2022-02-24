@@ -129,11 +129,18 @@ public class HobbyServiceImpl implements HobbyService {
                 .name("Nature")
                 .build();
 
+        HobbyDto travel = HobbyDto.builder()
+                .id(6L)
+                .userId(1L)
+                .name("Travel")
+                .build();
+
         hobbies.add(technology);
         hobbies.add(coding);
         hobbies.add(basketball);
         hobbies.add(cycling);
         hobbies.add(nature);
+        hobbies.add(travel);
 
         return hobbies;
     }

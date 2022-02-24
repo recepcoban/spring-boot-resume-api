@@ -114,8 +114,16 @@ public class LanguageServiceImpl implements LanguageService {
                 .level(LevelType.PROFICIENT)
                 .build();
 
+        LanguageDto spanish = LanguageDto.builder()
+                .id(3L)
+                .userId(1L)
+                .name("Spanish")
+                .level(LevelType.ELEMENTARY)
+                .build();
+
         languages.add(english);
         languages.add(turkish);
+        languages.add(spanish);
 
         return languages;
     }

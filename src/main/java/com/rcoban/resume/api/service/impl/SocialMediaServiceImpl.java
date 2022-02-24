@@ -114,8 +114,16 @@ public class SocialMediaServiceImpl implements SocialMediaService {
                 .url("https://github.com/recepcoban")
                 .build();
 
+        SocialMediaDto hackerrank = SocialMediaDto.builder()
+                .id(3L)
+                .userId(1L)
+                .type(SocialMediaType.HACKERRANK)
+                .url("https://www.hackerrank.com/recepcoban")
+                .build();
+
         socialMedias.add(linkedin);
         socialMedias.add(github);
+        socialMedias.add(hackerrank);
 
         return socialMedias;
     }

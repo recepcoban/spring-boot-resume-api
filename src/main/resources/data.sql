@@ -52,15 +52,17 @@ INSERT INTO Hobbies(id, user_id, name) VALUES(2, 1, 'Coding');
 INSERT INTO Hobbies(id, user_id, name) VALUES(3, 1, 'Basketball');
 INSERT INTO Hobbies(id, user_id, name) VALUES(4, 1, 'Cycling');
 INSERT INTO Hobbies(id, user_id, name) VALUES(5, 1, 'Nature');
+INSERT INTO Hobbies(id, user_id, name) VALUES(6, 1, 'Travel');
 
 INSERT INTO Languages(id, user_id, name, level) VALUES(1, 1, 'English', 'ADVANCED');
 INSERT INTO Languages(id, user_id, name, level) VALUES(2, 1, 'Turkish', 'PROFICIENT');
+INSERT INTO Languages(id, user_id, name, level) VALUES(3, 1, 'Spanish', 'ELEMENTARY');
 
 INSERT INTO Projects(id, user_id, name, url, details)
 VALUES(1,
        1,
        'Yapı Kredi Bank - Bancassurance',
-       null,
+       'https://www.yapikredi.com.tr/bireysel-bankacilik/sigorta-ve-emeklilik',
        'This is an Insurance Project of the Insurance Department which includes many products. Such as; My Goods Insurance, My Work Insurance, Health Insurance, Natural Disaster Insurance, Motor Insurance, Life Insurance, Private Pension System. Developing and maintaining all of the products of the project. Working on every process of the products. Backend, frontend, database. Developing with Java, Spring Boot, Rest, SOAP, React Js, Oracle, Harmoni(Framework based on Java, Spring, Html, Css, Bootstrap).');
 INSERT INTO Projects(id, user_id, name, url, details)
 VALUES(2,
@@ -80,6 +82,8 @@ INSERT INTO Skills(id, user_id, name, level) VALUES(2, 1, 'Spring Boot', 'ADVANC
 INSERT INTO Skills(id, user_id, name, level) VALUES(3, 1, 'Web Services(SOAP, REST)', 'UPPER_INTERMEDIATE');
 INSERT INTO Skills(id, user_id, name, level) VALUES(4, 1, 'React Js', 'INTERMEDIATE');
 INSERT INTO Skills(id, user_id, name, level) VALUES(5, 1, 'Atlassian(JIRA, Bitbucket, Bamboo)', 'UPPER_INTERMEDIATE');
+INSERT INTO Skills(id, user_id, name, level) VALUES(6, 1, 'Oracle', 'ELEMENTARY');
 
 INSERT INTO Social_Medias(id, user_id, type, url) VALUES(1, 1, 'LINKEDIN', 'https://www.linkedin.com/in/recepcoban');
 INSERT INTO Social_Medias(id, user_id, type, url) VALUES(2, 1, 'GITHUB', 'https://github.com/recepcoban');
+INSERT INTO Social_Medias(id, user_id, type, url) VALUES(3, 1, 'HACKERRANK', 'https://www.hackerrank.com/recepcoban');

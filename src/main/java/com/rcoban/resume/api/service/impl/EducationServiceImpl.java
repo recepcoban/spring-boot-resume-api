@@ -100,16 +100,6 @@ public class EducationServiceImpl implements EducationService {
     public List<EducationDto> getDefaultEducations() {
         List<EducationDto> educations = new ArrayList<>();
 
-        EducationDto istanbulUniversity = EducationDto.builder()
-                .id(1L)
-                .userId(1L)
-                .startDate(LocalDate.of(2010, 9, 17))
-                .endDate(LocalDate.of(2015, 6, 23))
-                .schoolName("Istanbul University")
-                .departmentName("Computer Engineering")
-                .active(false)
-                .build();
-
         EducationDto universityOfHelloWorld = EducationDto.builder()
                 .id(1L)
                 .userId(1L)
@@ -120,8 +110,18 @@ public class EducationServiceImpl implements EducationService {
                 .active(true)
                 .build();
 
-        educations.add(istanbulUniversity);
+        EducationDto istanbulUniversity = EducationDto.builder()
+                .id(2L)
+                .userId(1L)
+                .startDate(LocalDate.of(2010, 9, 17))
+                .endDate(LocalDate.of(2015, 6, 23))
+                .schoolName("Istanbul University")
+                .departmentName("Computer Engineering")
+                .active(false)
+                .build();
+
         educations.add(universityOfHelloWorld);
+        educations.add(istanbulUniversity);
 
         return educations;
     }
