@@ -50,7 +50,7 @@ public class ExperienceServiceImpl implements ExperienceService {
             throw RequiredFieldException.builder().messageResponse(MessageResponse.addErrorMessage(MessageUtil.ID_IS_REQUIRED)).build();
         }
 
-        return Optional.of(experienceRepository.findAllByUserId(userId)
+        return Optional.of(experienceRepository.findAllByUserIdOrderByStartDateDesc(userId)
                 .stream()
                 .map(experienceMapper::entityToDto)
                 .collect(Collectors.toList()))
@@ -100,33 +100,45 @@ public class ExperienceServiceImpl implements ExperienceService {
     public List<ExperienceDto> getDefaultExperiences() {
         List<ExperienceDto> experiences = new ArrayList<>();
 
+        ExperienceDto yapiKredi = ExperienceDto.builder()
+                .id(2L)
+                .userId(1L)
+                .startDate(LocalDate.of(2017, 10, 23))
+                .endDate(LocalDate.now())
+                .employer("Yapı Kredi Bank")
+                .url("https://www.yapikredi.com.tr")
+                .position("Senior Software Developer")
+                .responsibilities("Working with Insurance Department. Developing and maintaining a detailed banking and insurance project. Developing with Java, Spring Boot, Web services(SOAP, Rest), Oracle, React Js. Html, Css(Bootstrap, Ant Design).")
+                .active(true)
+                .build();
+
         ExperienceDto mapfre = ExperienceDto.builder()
                 .id(1L)
                 .userId(1L)
-                .startDate(LocalDate.of(2015, 11, 1))
-                .endDate(LocalDate.of(2017, 2, 1))
+                .startDate(LocalDate.of(2015, 1, 11))
+                .endDate(LocalDate.of(2017, 10, 21))
                 .employer("Mapfre Insurance")
                 .url("https://www.mapfre.com.tr")
                 .position("Software Developer")
                 .responsibilities("Developing and maintaining an insurance project. Developing with Java, JSF, Web services(SOAP), Oracle.")
+                .active(false)
                 .build();
 
-        ExperienceDto yapiKredi = ExperienceDto.builder()
-                .id(2L)
+        ExperienceDto imona = ExperienceDto.builder()
+                .id(1L)
                 .userId(1L)
-                .startDate(LocalDate.of(2017, 3, 1))
-                .endDate(LocalDate.now())
-                .employer("Yapı Kredi Bank - yapikredi.com.tr")
-                .url("https://www.yapikredi.com.tr")
-                .position("Senior Software Developer")
-                .responsibilities("Working with Insurance Department. " +
-                        "Developing and maintaining a detailed banking and insurance project. " +
-                        "Developing with Java, Spring Boot, Web services(SOAP, Rest), Oracle, React Js. Html, " +
-                        "Css(Bootstrap, Ant Design).")
+                .startDate(LocalDate.of(2014, 1, 11))
+                .endDate(LocalDate.of(2015, 1, 1))
+                .employer("ImonaCloud Technologies")
+                .url("https://www.imona.com")
+                .position("Junior Software Developer")
+                .responsibilities("Developing on their own platform(ImonaCloud) using Java, MySQL, Html, Css(Bootstrap).")
+                .active(false)
                 .build();
 
-        experiences.add(mapfre);
         experiences.add(yapiKredi);
+        experiences.add(mapfre);
+        experiences.add(imona);
 
         return experiences;
     }

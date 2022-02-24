@@ -125,14 +125,14 @@ public class SkillServiceImpl implements SkillService {
                 .id(4L)
                 .userId(1L)
                 .name("Atlassian(JIRA, Bitbucket, Bamboo)")
-                .level(LevelType.INTERMEDIATE)
+                .level(LevelType.UPPER_INTERMEDIATE)
                 .build();
 
         SkillDto reactJs = SkillDto.builder()
                 .id(5L)
                 .userId(1L)
                 .name("React Js")
-                .level(LevelType.UPPER_INTERMEDIATE)
+                .level(LevelType.INTERMEDIATE)
                 .build();
 
         skills.add(java);

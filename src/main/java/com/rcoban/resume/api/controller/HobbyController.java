@@ -35,7 +35,7 @@ public class HobbyController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a hobby by its id")
+    @Operation(summary = "Update a hobby")
     public ResponseEntity<HobbyResponse> updateById(@RequestBody @Valid HobbyDto hobbyDto) {
         return ResponseEntity.ok(hobbyService.updateById(hobbyDto));
     }

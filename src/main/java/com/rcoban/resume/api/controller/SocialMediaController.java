@@ -35,7 +35,7 @@ public class SocialMediaController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a social media by its id")
+    @Operation(summary = "Update a social media")
     public ResponseEntity<SocialMediaResponse> updateById(@RequestBody @Valid SocialMediaDto socialMediaDto) {
         return ResponseEntity.ok(socialMediaService.updateById(socialMediaDto));
     }

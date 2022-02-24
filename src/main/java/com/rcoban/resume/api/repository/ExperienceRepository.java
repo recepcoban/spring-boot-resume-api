@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ExperienceRepository extends JpaRepository<ExperienceEntity, Long> {
 
-    List<ExperienceEntity> findAllByUserId(Long userId);
+    List<ExperienceEntity> findAllByUserIdOrderByStartDateDesc(Long userId);
 
 }

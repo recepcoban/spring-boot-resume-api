@@ -108,13 +108,7 @@ public class UserServiceImpl implements UserService {
                 .birthDate(LocalDate.of(1989, 3, 2))
                 .phone("90 123 45 6789")
                 .location("Istanbul / Turkey")
-                .summary("Someone, " +
-                        "who has more than six years of insurance/banking experience, " +
-                        "who loves to travel, " +
-                        "who loves to read books, " +
-                        "who loves cats and dogs, " +
-                        "who wants to improve himself about new technologies, " +
-                        "who loves to watch movies, tv series and documentaries.")
+                .summary("Someone, who has more than six years of insurance/banking experience, who loves to travel, who loves to read books, who loves cats and dogs, who wants to improve himself about new technologies, who loves to watch movies, tv series and documentaries.")
                 .build();
 
         UserResponse userResponse = UserResponse.builder().user(userDto).build();

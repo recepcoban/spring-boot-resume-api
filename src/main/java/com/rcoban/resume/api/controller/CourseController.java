@@ -35,7 +35,7 @@ public class CourseController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a course by its id")
+    @Operation(summary = "Update a course")
     public ResponseEntity<CourseResponse> updateById(@RequestBody @Valid CourseDto courseDto) {
         return ResponseEntity.ok(courseService.updateById(courseDto));
     }

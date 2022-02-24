@@ -35,7 +35,7 @@ public class ProjectController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a project by its id")
+    @Operation(summary = "Update a project")
     public ResponseEntity<ProjectResponse> updateById(@RequestBody @Valid ProjectDto projectDto) {
         return ResponseEntity.ok(projectService.updateById(projectDto));
     }

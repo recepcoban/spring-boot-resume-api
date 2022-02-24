@@ -35,7 +35,7 @@ public class ExperienceController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a experience by its id")
+    @Operation(summary = "Update a experience")
     public ResponseEntity<ExperienceResponse> updateById(@RequestBody @Valid ExperienceDto experienceDto) {
         return ResponseEntity.ok(experienceService.updateById(experienceDto));
     }

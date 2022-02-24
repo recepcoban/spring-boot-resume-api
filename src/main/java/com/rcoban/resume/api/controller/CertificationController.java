@@ -35,7 +35,7 @@ public class CertificationController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a certification by its id")
+    @Operation(summary = "Update a certification")
     public ResponseEntity<CertificationResponse> updateById(@RequestBody @Valid CertificationDto certificationDto) {
         return ResponseEntity.ok(certificationService.updateById(certificationDto));
     }

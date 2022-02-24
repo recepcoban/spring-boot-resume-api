@@ -35,7 +35,7 @@ public class LanguageController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a language by its id")
+    @Operation(summary = "Update a language")
     public ResponseEntity<LanguageResponse> updateById(@RequestBody @Valid LanguageDto languageDto) {
         return ResponseEntity.ok(languageService.updateById(languageDto));
     }

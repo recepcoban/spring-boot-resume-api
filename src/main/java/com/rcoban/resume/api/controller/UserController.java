@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a user by its id")
+    @Operation(summary = "Update a user")
     public ResponseEntity<UserResponse> updateById(@RequestBody @Valid UserDto userDto) {
         return ResponseEntity.ok(userService.updateById(userDto));
     }

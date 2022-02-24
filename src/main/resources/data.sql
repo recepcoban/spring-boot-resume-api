@@ -41,10 +41,10 @@ VALUES(3,
        1,
        'ImonaCloud Technologies',
        'https://www.imona.com',
-       'Junior Software Developer(intern)',
+       'Junior Software Developer',
        to_date('11-01-2014', 'dd-MM-yyyy'),
        to_date('01-01-2015', 'dd-MM-yyyy'),
-       'Developing on their own platform(ImonaCloud) using Java, MySQL, Html, Css(Bootstrap)', false);
+       'Developing on their own platform(ImonaCloud) using Java, MySQL, Html, Css(Bootstrap).', false);
 
 INSERT INTO Hobbies(id, user_id, name) VALUES(1, 1, 'Technology');
 INSERT INTO Hobbies(id, user_id, name) VALUES(2, 1, 'Coding');
@@ -60,7 +60,7 @@ VALUES(1,
        1,
        'Yapı Kredi Bank - Bancassurance',
        null,
-       'This is an Insurance Project of the Insurance Department which includes many products. Such as; My Goods Insurance, My Work Insurance, Health Insurance, Natural Disaster Insurance, Motor Insurance, Life Insurance, Private Pension System. Developing and maintaining all of the products of the project. Working on every process of the products. Backend, frontend, database. Developing with Java, Spring Boot, Rest, SOAP, React Js, Oracle, Harmoni(Framework based on Java, Spring, Html, Css, Bootstrap)');
+       'This is an Insurance Project of the Insurance Department which includes many products. Such as; My Goods Insurance, My Work Insurance, Health Insurance, Natural Disaster Insurance, Motor Insurance, Life Insurance, Private Pension System. Developing and maintaining all of the products of the project. Working on every process of the products. Backend, frontend, database. Developing with Java, Spring Boot, Rest, SOAP, React Js, Oracle, Harmoni(Framework based on Java, Spring, Html, Css, Bootstrap).');
 INSERT INTO Projects(id, user_id, name, url, details)
 VALUES(2,
        1,

@@ -35,7 +35,7 @@ public class SkillController {
     }
 
     @PutMapping
-    @Operation(summary = "Update a skill by its id")
+    @Operation(summary = "Update a skill")
     public ResponseEntity<SkillResponse> updateById(@RequestBody @Valid SkillDto skillDto) {
         return ResponseEntity.ok(skillService.updateById(skillDto));
     }
