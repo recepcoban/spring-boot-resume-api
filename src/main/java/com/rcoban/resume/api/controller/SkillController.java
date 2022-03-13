@@ -22,6 +22,12 @@ public class SkillController {
 
     private final SkillService skillService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a skill by its id")
+    public ResponseEntity<SkillResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(skillService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all skills by user id")
     public ResponseEntity<List<SkillDto>> getAllByUserId(@PathVariable Long userId) {

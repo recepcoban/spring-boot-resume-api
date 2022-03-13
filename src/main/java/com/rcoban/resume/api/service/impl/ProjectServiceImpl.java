@@ -103,7 +103,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .id(1L)
                 .userId(1L)
                 .name("Yapı Kredi Bank - Bancassurance")
-                .url(null)
+                .url("https://www.yapikredi.com.tr/bireysel-bankacilik/sigorta-ve-emeklilik")
                 .details("This is an Insurance Project of the Insurance Department which includes many products. Such as; My Goods Insurance, My Work Insurance, Health Insurance, Natural Disaster Insurance, Motor Insurance, Life Insurance, Private Pension System. Developing and maintaining all of the products of the project. Working on every process of the products. Backend, frontend, database. Developing with Java, Spring Boot, Rest, SOAP, React Js, Oracle, Harmoni(Framework based on Java, Spring, Html, Css, Bootstrap).")
                 .build();
 

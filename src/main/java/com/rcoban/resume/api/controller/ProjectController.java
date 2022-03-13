@@ -22,6 +22,12 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a project by its id")
+    public ResponseEntity<ProjectResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(projectService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all projects by user id")
     public ResponseEntity<List<ProjectDto>> getAllByUserId(@PathVariable Long userId) {

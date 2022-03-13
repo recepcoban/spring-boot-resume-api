@@ -22,6 +22,12 @@ public class CertificationController {
 
     private final CertificationService certificationService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a certification by its id")
+    public ResponseEntity<CertificationResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(certificationService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all certifications by user id")
     public ResponseEntity<List<CertificationDto>> getAllByUserId(@PathVariable Long userId) {

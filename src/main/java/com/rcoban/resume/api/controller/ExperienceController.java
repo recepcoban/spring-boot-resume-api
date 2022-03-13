@@ -22,6 +22,12 @@ public class ExperienceController {
 
     private final ExperienceService experienceService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a experience by its id")
+    public ResponseEntity<ExperienceResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(experienceService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all experiences by user id")
     public ResponseEntity<List<ExperienceDto>> getAllByUserId(@PathVariable Long userId) {

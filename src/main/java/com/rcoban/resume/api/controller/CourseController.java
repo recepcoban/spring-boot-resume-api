@@ -22,6 +22,12 @@ public class CourseController {
 
     private final CourseService courseService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a course by its id")
+    public ResponseEntity<CourseResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(courseService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all courses by user id")
     public ResponseEntity<List<CourseDto>> getAllByUserId(@PathVariable Long userId) {

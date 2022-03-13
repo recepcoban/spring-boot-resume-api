@@ -22,6 +22,12 @@ public class EducationController {
 
     private final EducationService educationService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a education by its id")
+    public ResponseEntity<EducationResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(educationService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all educations by user id")
     public ResponseEntity<List<EducationDto>> getAllByUserId(@PathVariable Long userId) {

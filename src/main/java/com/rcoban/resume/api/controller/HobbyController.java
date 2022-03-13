@@ -22,6 +22,12 @@ public class HobbyController {
 
     private final HobbyService hobbyService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a hobby by its id")
+    public ResponseEntity<HobbyResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(hobbyService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all hobbies by user id")
     public ResponseEntity<List<HobbyDto>> getAllByUserId(@PathVariable Long userId) {

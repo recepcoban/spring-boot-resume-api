@@ -22,6 +22,12 @@ public class SocialMediaController {
 
     private final SocialMediaService socialMediaService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a social media by its id")
+    public ResponseEntity<SocialMediaResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(socialMediaService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all social medias by user id")
     public ResponseEntity<List<SocialMediaDto>> getAllByUserId(@PathVariable Long userId) {

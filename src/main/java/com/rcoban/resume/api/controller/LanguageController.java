@@ -22,6 +22,12 @@ public class LanguageController {
 
     private final LanguageService languageService;
 
+    @GetMapping("/info/{id}")
+    @Operation(summary = "Get a language by its id")
+    public ResponseEntity<LanguageResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(languageService.getById(id));
+    }
+
     @GetMapping("/{userId}")
     @Operation(summary = "Get all languages by user id")
     public ResponseEntity<List<LanguageDto>> getAllByUserId(@PathVariable Long userId) {
