@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "Languages")
+@SequenceGenerator(name = "seqIdGenerator", initialValue = 100, allocationSize = 100)
 public class LanguageEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqIdGenerator")
     private Long id;
 
     private Long userId;

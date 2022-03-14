@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "SocialMedias")
+@SequenceGenerator(name = "seqIdGenerator", initialValue = 100, allocationSize = 100)
 public class SocialMediaEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqIdGenerator")
     private Long id;
 
     private Long userId;

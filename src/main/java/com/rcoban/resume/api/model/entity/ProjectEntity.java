@@ -7,10 +7,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "Projects")
+@SequenceGenerator(name = "seqIdGenerator", initialValue = 100, allocationSize = 100)
 public class ProjectEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqIdGenerator")
     private Long id;
 
     private Long userId;
